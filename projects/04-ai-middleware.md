@@ -36,4 +36,4 @@ public List<Book> getPersonalizedRecommendations(String memberId) {
 
 ## 설치·배포 체계 인수
 
-핵심 개발자가 아니었음에도 설치 관리 담당을 맡게 되어, 기존에 산재해 있던 설치 자료를 정비하고 Linux 설치 스크립트 8종을 단독으로 작성했습니다. 자세한 내용은 [현장 설치·배포 자동화](02-install-automation.md) 문서를 참고해주세요.
+핵심 개발자가 아니었음에도 설치 관리 담당을 맡게 되어, 기존에 산재해 있던 설치 자료를 정비하고 Linux 설치 스크립트 8종을 단독으로 작성했습니다. 자세한 내용은 [현장 설치·배포 자동화](05-install-automation.md) 문서를 참고해주세요.
