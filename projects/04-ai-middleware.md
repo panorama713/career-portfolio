@@ -14,6 +14,26 @@
 - **API 문서화** — 로그인·인증, 개인 맞춤 추천, 작가 도서 추천, 기관 수상작 추천에 대한 Swagger 명세 작성 (401 응답 예시 포함)
 - **로깅 체계 구성** — Logback 기반 로그 파일 저장 설정 추가
 
+### 예시 코드 — 추천 결과 보정
+
+> 아래 코드는 실제 구현을 단순화해 재구성한 예시입니다.
+
+```java
+public List<Book> getPersonalizedRecommendations(String memberId) {
+    List<Book> personalized = recommendationClient.fetch(memberId);
+
+    if (personalized.size() < MIN_RECOMMENDATION_COUNT) {
+        // 결과가 비어 보이지 않도록 부족분을 인기 도서로 보충
+        List<Book> popularBooks = popularBookService.getTopPopular(
+                MIN_RECOMMENDATION_COUNT - personalized.size());
+        personalized = Stream.concat(personalized.stream(), popularBooks.stream())
+                .distinct()
+                .toList();
+    }
+    return personalized;
+}
+```
+
 ## 설치·배포 체계 인수
 
 핵심 개발자가 아니었음에도 설치 관리 담당을 맡게 되어, 기존에 산재해 있던 설치 자료를 정비하고 Linux 설치 스크립트 8종을 단독으로 작성했습니다. 자세한 내용은 [현장 설치·배포 자동화](02-install-automation.md) 문서를 참고해주세요.

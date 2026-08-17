@@ -16,6 +16,28 @@
 
 최초 구축(cold start)과 증분 갱신의 처리 방식이 달라, **증분 실행 시 입력 파일이 존재하지 않아 적재가 실패하는 오류**가 있었습니다. Cold start 여부를 실행 옵션으로 분리하고 **빈 CSV를 생성하는 Step을 추가해 파이프라인이 중단 없이 완주**하도록 했습니다. 이후 파일 복사 자체를 Jenkins Job 조건으로 옮겨 애플리케이션에서 불필요한 로직을 제거했습니다.
 
+> 아래 코드는 실제 구현을 단순화해 재구성한 예시입니다.
+
+```java
+@Bean
+public Step ensureInputFileStep(JobRepository jobRepository, PlatformTransactionManager tm) {
+    return new StepBuilder("ensureInputFileStep", jobRepository)
+            .tasklet((contribution, chunkContext) -> {
+                JobParameters params = chunkContext.getStepContext()
+                        .getStepExecution().getJobParameters();
+                boolean isColdStart = "true".equals(params.getString("coldStart", "false"));
+                Path inputFile = resolveInputPath(params);
+
+                if (!isColdStart && !Files.exists(inputFile)) {
+                    // 증분 실행인데 입력 파일이 없으면 빈 CSV를 만들어 이후 Step이 중단 없이 진행되도록 함
+                    Files.createFile(inputFile);
+                }
+                return RepeatStatus.FINISHED;
+            }, tm)
+            .build();
+}
+```
+
 ### ③ 레거시 도서관 시스템(v1) 전처리 프로세스 구현 (2024.04~05)
 
 통계 기반(v2)과 별개로, **기존 카테고리 기반 추천을 사용하는 도서관을 위한 v1 전처리 프로세스**를 담당해 구현했습니다. 두 방식이 **Job/Step 구성 단위로 병존**하도록 설계되어, 도서관 환경에 따라 선택 적용이 가능합니다.

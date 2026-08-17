@@ -20,7 +20,39 @@
 
 **민감정보 암호화 계층 분리** — 알림톡 발송에는 이용자 휴대폰 번호가 필요한데 평문 저장은 개인정보 리스크가 큽니다. **RSA 비대칭키를 적용해 저장은 공개키, 발송 시점 복호화는 비밀키로 분리**해 DB 접근만으로는 번호를 복원할 수 없도록 했습니다. DB 비밀번호·외부 API 키 등은 **Jasypt로 암호화**해 저장소에 평문이 남지 않게 했습니다.
 
+> 아래 코드는 실제 구현을 단순화해 재구성한 예시입니다.
+
+```java
+// 저장 시: 공개키로 암호화 (앱 서버 어디서든 가능)
+public String encryptPhoneNumber(String rawPhoneNumber) {
+    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+    cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+    byte[] encrypted = cipher.doFinal(rawPhoneNumber.getBytes(StandardCharsets.UTF_8));
+    return Base64.getEncoder().encodeToString(encrypted);
+}
+
+// 발송 시점: 비밀키로 복호화 (비밀키는 발송 처리 서버에만 존재)
+public String decryptPhoneNumber(String encryptedPhoneNumber) {
+    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+    cipher.init(Cipher.DECRYPT_MODE, privateKey);
+    byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedPhoneNumber));
+    return new String(decrypted, StandardCharsets.UTF_8);
+}
+```
+
 **캐시 도입 시 개발 환경 편의성 보존** — 도서 검색에 Redis 캐시를 적용하면서, 로컬에서는 Redis 없이도 기동 가능하도록 `spring.cache.type=none` 분기를 제공해 **온보딩 비용을 낮췄습니다.**
+
+```yaml
+# application-local.yml — Redis 없이 로컬 기동
+spring:
+  cache:
+    type: none
+---
+# application-prod.yml
+spring:
+  cache:
+    type: redis
+```
 
 ## 현장 설치 자동화
 
