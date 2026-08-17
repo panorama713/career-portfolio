@@ -31,6 +31,40 @@
 
 ## 프로젝트
 
+```mermaid
+flowchart TB
+    Library["공공도서관<br/>30개 기관 · 키오스크 65대"]
+
+    Mindpick["마인드픽<br/>그림심리검사"]
+    Recommend["도서 추천 시스템<br/>대출이력 분석"]
+    Bookmate["북메이트<br/>무인 키오스크"]
+    Middleware["AI 미들웨어<br/>도서관 연계"]
+
+    Install["설치·배포 자동화<br/>4개 제품 공통 인프라"]
+
+    Library --> Mindpick
+    Library --> Recommend
+    Library --> Bookmate
+    Library --> Middleware
+
+    Bookmate <--> Middleware
+
+    Mindpick -.-> Install
+    Recommend -.-> Install
+    Bookmate -.-> Install
+    Middleware -.-> Install
+
+    classDef solo fill:#EEEDFE,stroke:#534AB7,color:#26215C;
+    classDef team fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
+    classDef infra fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A,stroke-dasharray: 4 3;
+
+    class Mindpick solo;
+    class Recommend,Bookmate,Middleware team;
+    class Library,Install infra;
+```
+
+*보라 = 단독 개발, 청록 = 공동 개발*
+
 | 프로젝트 | 기간 | 요약 |
 |---|---|---|
 | [1. 마인드픽 — AI 그림심리검사 기반 도서추천 서비스](projects/01-mindpick.md) | 2025.07 ~ | 백엔드·게이트웨이·인프라 전 영역 단독 개발. OpenAI Responses API + SSE 스트리밍 + RAG, GS 품질인증 획득 |

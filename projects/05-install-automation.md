@@ -2,6 +2,19 @@
 
 > 2024 ~ | 북메이트, 도서 추천 시스템, AI 미들웨어, 마인드픽 4개 제품에 적용
 
+```mermaid
+flowchart TD
+    Start["1_설치 실행"] --> Detect{"서버 OS 감지"}
+    Detect -->|systemd| A["systemd 등록"]
+    Detect -->|SysV init| B["service 등록"]
+    Detect -->|기타| C["nohup 백그라운드"]
+    A --> Verify
+    B --> Verify
+    C --> Verify["포트 LISTENING<br/>최대 30초 폴링"]
+    Verify -->|성공| Done["설치 완료"]
+    Verify -->|실패| Log["로그 경로 안내"]
+```
+
 30개 기관·65대 규모로 확산되면서 설치 과정 자체가 병목이 되었습니다. 설치할 때마다 **JDK 설치 → 기관별 설정 파일 작성 → 서비스 등록 → 기동 확인**을 수작업으로 진행해 **기관당 약 1시간**이 걸렸고, 현장 인력이 개발자가 아니어서 설정 누락·권한 오류가 반복됐습니다.
 
 ## 설계 원칙

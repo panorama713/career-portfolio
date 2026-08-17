@@ -3,6 +3,26 @@
 > **2025.07 ~** | **백엔드·게이트웨이·인프라 전 영역 단독 개발** | 서버 9개 저장소 / 단독 커밋 약 350건
 > 그림심리검사(HTP·PITR·KFD) 이미지를 AI가 분석해 심리 상태를 해석하고, 결과에 맞는 도서를 추천하는 도서관용 키오스크·모바일 서비스
 
+```mermaid
+flowchart TB
+    Client["키오스크 · 모바일 · 웹"]
+    Gateway["Gateway<br/>인증 필터"]
+    API["API<br/>이미지 분석 · SSE"]
+    Admin["Admin API<br/>백오피스"]
+    Thesis["Thesis API<br/>FastAPI + FAISS"]
+    Eureka["Eureka<br/>서비스 디스커버리"]
+    OpenAI["OpenAI<br/>Responses API"]
+
+    Client --> Gateway
+    Gateway --> API
+    Gateway --> Admin
+    API --> OpenAI
+    API --> Thesis
+    API -.등록.-> Eureka
+    Thesis -.등록.-> Eureka
+    Gateway -.조회.-> Eureka
+```
+
 ## 배경 및 문제
 
 기존 그림심리검사는 전문 상담사의 수기 해석에 의존해 **도서관 단독 운영이 불가능**했습니다. 이를 AI로 대체하면서 다음 세 가지를 동시에 해결해야 했습니다.

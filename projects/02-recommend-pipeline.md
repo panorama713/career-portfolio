@@ -3,6 +3,29 @@
 > **2024.01 ~** | **공동 개발** | 본인 커밋 약 100건 (recommend-api 주도, recommend-etl 공동)
 > **월 60만 ~ 180만 건**의 대출 이력을 집계해 추천 도서를 산출 (100만 건 기준 약 80분 소요)
 
+```mermaid
+flowchart LR
+    subgraph 데이터소스
+        LAS["도서관 정보시스템"]
+        MySQL["MySQL"]
+        PG["PostgreSQL"]
+        Mongo["MongoDB"]
+        Tibero["Tibero"]
+    end
+    Trino["Trino<br/>분산 쿼리"]
+    ETL["ETL<br/>수집"]
+    ML["분석<br/>카테고리 · 키워드"]
+    Export["Export<br/>적재"]
+    API["recommend-api"]
+
+    LAS --> Trino
+    MySQL --> Trino
+    PG --> Trino
+    Mongo --> Trino
+    Tibero --> Trino
+    Trino --> ETL --> ML --> Export --> API
+```
+
 ## 담당 업무
 
 - **recommend-api (주도)** — 산출된 추천 결과를 서비스에 제공하는 REST API 개발 및 운영
