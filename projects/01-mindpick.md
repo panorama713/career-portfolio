@@ -127,7 +127,7 @@ public class DeviceAuthGatewayFilterFactory
 
 ### 6. LLM 토큰 사용량을 요청 단위로 추적
 
-LLM은 호출량이 곧 비용이라, 기관별 사용량을 모르면 과금 근거도 원가 예측도 불가능했습니다. `ThreadLocal` 기반 `TokenUsageContext`로 요청 처리 중 발생한 토큰을 수집하고, 인터셉터에서 **요청 URI·도서관 코드·모델명·prompt/completion/total 토큰을 `api_call_log` 테이블에 적재**했습니다. 비즈니스 로직에 로깅을 섞지 않으면서 전 API에 일괄 적용할 수 있었고, **기관별 비용 집계와 이상 사용 탐지의 기반**이 되었습니다.
+LLM은 호출량이 곧 비용이라, 기관별 사용량을 모르면 과금 근거도 원가 예측도 불가능했습니다. `ThreadLocal` 기반 `TokenUsageContext`로 요청 처리 중 발생한 토큰을 수집하고, 인터셉터에서 **요청 URI·도서관 코드·모델명·prompt/completion/total 토큰을 `api_call_log` 테이블에 적재**했습니다. 비즈니스 로직에 로깅을 섞지 않으면서 전 API에 일괄 적용할 수 있었고, **기관별 비용 집계의 기반**이 되었습니다.
 
 ```java
 public class TokenUsageContext {
