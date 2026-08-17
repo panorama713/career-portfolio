@@ -45,7 +45,7 @@ WebSocket도 검토했으나, 요청 이후에는 서버 → 클라이언트 단
 // 서버: SSE로 보내기 전, 선행 공백을 일반 space 대신 non-breaking space로 치환
 private String encodeForSse(String token) {
     return token.startsWith(" ")
-            ? " " + token.substring(1)
+            ? "\u00A0" + token.substring(1)
             : token;
 }
 
@@ -60,7 +60,7 @@ public Flux<ServerSentEvent<String>> streamAnalysis(@RequestParam Long sessionId
 ```javascript
 // 클라이언트: 수신 시 non-breaking space를 일반 공백으로 복원
 eventSource.onmessage = (event) => {
-    appendToOutput(event.data.replace(/ /g, " "));
+    appendToOutput(event.data.replace(/\u00A0/g, " "));
 };
 ```
 
