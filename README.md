@@ -27,7 +27,7 @@
 | **AI·데이터** | Spring AI, OpenAI API(Responses·Embeddings·Vector Store), FAISS, Spring Batch, Trino, PostgreSQL, MongoDB, Tibero |
 | **인프라·운영** | Docker, Jenkins, Nginx, NCP(Rocky Linux), PM2, Redis, systemd, WinSW, Shell/Batch 스크립트 |
 | **AI 협업** | Claude Code (실무 적용) |
-| **사용 경험** | Python(FastAPI), OpenCV, Next.js/React, Electron, Jasypt, Log4j2 |
+| **사용 경험** | Python(FastAPI), OpenCV, Next.js/React, Electron, Log4j2 |
 
 ---
 
