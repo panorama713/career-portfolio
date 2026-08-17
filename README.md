@@ -42,10 +42,10 @@ flowchart TB
 
     Install["설치·배포 자동화<br/>4개 제품 공통 인프라"]
 
-    Library --> Mindpick
-    Library --> Recommend
-    Library --> Bookmate
-    Library --> Middleware
+    Library -->|30개 기관| Bookmate
+    Library -->|29개 기관| Recommend
+    Library -->|2개 기관| Middleware
+    Library -.->|정식 판매 전| Mindpick
 
     Bookmate <--> Middleware
 
