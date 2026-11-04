@@ -4,20 +4,26 @@
 > **도입 30개 도서관 · 키오스크 65대 · 일평균 약 2,700건의 키오스크 이용·추천 조회 처리**
 
 ```mermaid
-flowchart TB
-    subgraph 본인담당["본인 담당"]
-        Award["문학상 수상작 도메인"]
-        Stats["도서관 통계"]
-        KioskMgmt["키오스크 관리"]
-        SNS["SNS 연동"]
-        Yes24["YES24 데이터 전환"]
-        Ops["화면 감시 · 원격 패치 배포"]
-    end
-    subgraph 동료담당["동료(팀 리드) 담당"]
-        Infra["인프라 · CI/CD"]
-        GW["게이트웨이"]
-        Biblio["서지 데이터 구축 배치"]
-    end
+flowchart LR
+    Me(["본인"])
+    Mate(["동료(팀 리드)"])
+
+    Feat["<b>서버 기능</b><br/>문학상 수상작 도메인<br/>도서관 이용 통계<br/>키오스크 관리 · SNS 연동"]
+    Data["<b>데이터 전환</b><br/>YES24 데이터 전환<br/>성향 분석 추천 재구성"]
+    Ops["<b>현장 운영</b><br/>설치 자동화<br/>화면 감시 · 원격 패치 배포"]
+    Team["<b>인프라 · 플랫폼</b><br/>인프라 · CI/CD<br/>게이트웨이<br/>서지 데이터 구축 배치"]
+
+    Me --> Feat
+    Me --> Data
+    Me --> Ops
+    Mate --> Team
+
+    classDef mine fill:#EEEDFE,stroke:#534AB7,color:#26215C;
+    classDef team fill:#E1F5EE,stroke:#0F6E56,color:#04342C;
+    classDef who fill:#F1EFE8,stroke:#5F5E5A,color:#2C2C2A;
+    class Feat,Data,Ops mine;
+    class Team team;
+    class Me,Mate who;
 ```
 
 ## 담당 범위 (본인)
