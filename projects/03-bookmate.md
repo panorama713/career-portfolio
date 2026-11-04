@@ -4,7 +4,7 @@
 > **도입 30개 도서관 · 키오스크 65대 · 일평균 약 2,700건의 키오스크 이용·추천 조회 처리**
 
 ```mermaid
-flowchart LR
+flowchart TD
     Jenkins["Jenkins<br/>배포물 등록"] --> Server["중앙 서버<br/>그룹별 버전"]
     Updater["업데이터<br/>키오스크·서버"] -->|주기 조회| Server
     Server -->|새 버전| Verify{"SHA-256<br/>서명 검증"}
