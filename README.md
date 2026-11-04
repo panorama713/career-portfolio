@@ -69,7 +69,7 @@ flowchart TB
 
 | 프로젝트 | 기간      | 요약 |
 |---|-----------|---|
-| [1. 마인드픽 — AI 그림심리검사 기반 도서추천 서비스](projects/01-mindpick.md) | 2025.07 ~ | 백엔드·게이트웨이·인프라 전 영역 단독 개발. OpenAI Responses API + SSE 스트리밍 + RAG, GS 품질인증 획득 |
+| [1. 마인드픽 — AI 그림심리검사 기반 도서추천 서비스](projects/01-mindpick.md) | 2025.07 ~ 2026.02 | 백엔드·게이트웨이·인프라 전 영역 단독 개발. OpenAI Responses API + SSE 스트리밍 + RAG, GS 품질인증 획득 |
 | [2. 도서 추천 시스템 — 대출 이력 기반 추천 데이터 파이프라인](projects/02-recommend-pipeline.md) | 2024.01 ~ 2026.06 | 29개 기관 적용, Spring Batch 파이프라인, LLM 도서 설명 키워드 ETL 구축 |
 | [3. 북메이트 — 도서관 무인 추천·정보 키오스크 플랫폼](projects/03-bookmate.md) | 2024.01 ~ | 30개 도서관·키오스크 65대, YES24 데이터 전환, 화면 감시·원격 패치 배포 |
 | [4. AI 미들웨어(북큐레이션) — 도서관 정보시스템 연계 서비스](projects/04-ai-middleware.md) | 2025.06 ~ | 2개 기관 적용, 2026.09부터 단독 개발, 본사 연동·LLM 리포트 정제 |
