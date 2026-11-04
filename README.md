@@ -39,11 +39,11 @@ flowchart TB
     Library["공공도서관"]
 
     Mindpick["마인드픽<br/>그림심리검사"]
-    Recommend["도서 추천 시스템<br/>대출이력 분석"]
+    Recommend["추천 시스템<br/>대출이력 분석"]
     Bookmate["북메이트<br/>무인 키오스크"]
     Middleware["AI 미들웨어<br/>도서관 연계"]
 
-    Install["설치·배포 자동화<br/>3개 제품 공통 인프라"]
+    Install["설치·배포<br/>자동화<br/>3개 제품 공통"]
 
     Library -->|30개 기관| Bookmate
     Library -->|29개 기관| Recommend

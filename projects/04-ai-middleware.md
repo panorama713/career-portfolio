@@ -8,9 +8,9 @@ flowchart LR
     User["키오스크 이용자<br/>RFID 태그"]
     Auth["인증 · 세션<br/>5분 제한"]
     Detail{"도서 상세 조회"}
-    LibSys["도서관 정보시스템"]
+    LibSys["도서관<br/>정보시스템"]
     Bookmate["북메이트"]
-    Reco["추천 결과<br/>10권 미만 시 인기도서 보충"]
+    Reco["추천 결과<br/>10권 미만 시<br/>인기도서 보충"]
 
     User --> Auth --> Detail
     Detail -->|소장 도서| LibSys

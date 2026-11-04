@@ -6,7 +6,7 @@
 ```mermaid
 flowchart LR
     subgraph 데이터소스
-        LAS["도서관 정보시스템"]
+        LAS["도서관<br/>정보시스템"]
         MySQL["MySQL"]
         PG["PostgreSQL"]
         Mongo["MongoDB"]
@@ -14,7 +14,7 @@ flowchart LR
     end
     Trino["Trino<br/>분산 쿼리"]
     ETL["ETL<br/>수집"]
-    ML["분석<br/>카테고리 · 키워드"]
+    ML["분석<br/>카테고리<br/>키워드"]
     Export["Export<br/>적재"]
     API["recommend-api"]
 

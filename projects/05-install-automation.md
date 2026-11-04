@@ -7,7 +7,7 @@ flowchart TD
     Start["1_설치 실행"] --> Detect{"서버 OS 감지"}
     Detect -->|systemd| A["systemd 등록"]
     Detect -->|SysV init| B["service 등록"]
-    Detect -->|기타| C["nohup 백그라운드"]
+    Detect -->|기타| C["nohup<br/>백그라운드"]
     A --> Verify
     B --> Verify
     C --> Verify["포트 LISTENING<br/>최대 30초 폴링"]

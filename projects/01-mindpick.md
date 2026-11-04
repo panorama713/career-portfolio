@@ -5,12 +5,12 @@
 
 ```mermaid
 flowchart TB
-    Client["키오스크 · 모바일 · 웹"]
+    Client["키오스크<br/>모바일 · 웹"]
     Gateway["Gateway<br/>인증 필터"]
-    API["API<br/>이미지 분석 · SSE"]
+    API["API<br/>이미지 분석<br/>SSE"]
     Admin["Admin API<br/>백오피스"]
     Thesis["Thesis API<br/>FastAPI + FAISS"]
-    Eureka["Eureka<br/>서비스 디스커버리"]
+    Eureka["Eureka<br/>서비스<br/>디스커버리"]
     OpenAI["OpenAI<br/>Responses API"]
 
     Client --> Gateway
